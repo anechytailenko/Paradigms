@@ -66,9 +66,17 @@ typedef struct nodeOfLinkedList {
 
 
 // function create node
-node* createNode() {
+node* createNodeWithText() {
     node* Node = (node*) malloc (sizeof(node));
     Node->ptrOnRow = accessPtrString();
+    Node->nextNodeAdress = NULL;
+    return Node;
+}
+node* createNodeWithoutText() {
+    node* Node = (node*) malloc (sizeof(node));
+    char* ptrRow = (char*) malloc (3);
+    ptrRow[0] = '\0';
+    Node->ptrOnRow = ptrRow;
     Node->nextNodeAdress = NULL;
     return Node;
 }
@@ -83,7 +91,7 @@ void* addNode(node* headOfLinkedList) {
         while(currentNode->nextNodeAdress != NULL) {
             currentNode = currentNode->nextNodeAdress;
         }
-        currentNode->nextNodeAdress = createNode();
+        currentNode->nextNodeAdress = createNodeWithText();
 
     }
 }
@@ -108,18 +116,35 @@ void* appendTextToEnd(node* headOfLinkedList) {
         }
         currentNode->ptrOnRow = ptrOldRow;
     }
+}
 
 
+//add new string
+void* newLine(node* headOfLinkedList) {
+    if ((headOfLinkedList->ptrOnRow) == 0) {
+        char* ptrRow =(char*) malloc(3);
+        ptrRow[0] = '\n';
+        ptrRow[1] = '\0';
+        headOfLinkedList->ptrOnRow = ptrRow;
+        headOfLinkedList->nextNodeAdress = createNodeWithoutText();
+    } else {
+        node* currentNode = headOfLinkedList;
+        while(currentNode->nextNodeAdress != NULL) {
+            currentNode = currentNode->nextNodeAdress;
+        }
+        char* ptrRow = currentNode->ptrOnRow;
+        int amountOfLetters = strlen(ptrRow);
+        ptrRow =  (char*) realloc(ptrRow,amountOfLetters+ 3);
+        ptrRow[amountOfLetters] = '\n';
+        amountOfLetters++;
+        ptrRow[amountOfLetters] = '\0';
+        currentNode->ptrOnRow = ptrRow;
+        currentNode->nextNodeAdress = createNodeWithoutText();
 
-
-    node* currentNode = headOfLinkedList;
-    while(currentNode->nextNodeAdress != NULL) {
-        currentNode = currentNode->nextNodeAdress;
     }
-    char* ptrRow = currentNode->ptrOnRow ;
-    return ptrRow;
 
 }
+
 
 // read text from memory
 void readTextFromMemory(node* headOfLinkedList) {
@@ -138,20 +163,28 @@ int main(){
     int mode;
     int n = 1;
     node* headOfLinkedList = (node*) calloc ( n, sizeof(node));
-    mode = userCommand();
-    switch(mode) {
-        case 1:
+    while(true){
+        mode = userCommand();
+        switch(mode) {
+            case 1:
+                printf("Enter text to append: ");
+                appendTextToEnd(headOfLinkedList);
+                printf("Enter text to append: ");
+                appendTextToEnd(headOfLinkedList);
+                printf("Enter text to append: ");
+                appendTextToEnd(headOfLinkedList);
 
-            printf("Enter text to append: ");
-            appendTextToEnd(headOfLinkedList);
-            printf("Enter text to append: ");
-            appendTextToEnd(headOfLinkedList);
-            printf("Enter text to append: ");
-            appendTextToEnd(headOfLinkedList);
-
-            readTextFromMemory(headOfLinkedList);
-            break;
-        // case 2:
+                readTextFromMemory(headOfLinkedList);
+                break;
+            case 2 :
+                printf("Enter text to append: ");
+                appendTextToEnd(headOfLinkedList);
+                newLine(headOfLinkedList);
+                printf("Enter text to append: ");
+                appendTextToEnd(headOfLinkedList);
+                readTextFromMemory(headOfLinkedList);
+                break;
+        }
 
 
         //     printf("New line is started");
