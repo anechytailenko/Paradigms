@@ -14,15 +14,31 @@
 
 
 int userCommand () {
-   int userMode ;
-   printf("Choose the command:\n1.Append text symbols to the end:\n2.Start the new line:\n3.Use files to loading the information\n4.Use files to saving the information\n5.Print the current text to console\n6.Insert the text by line and symbol index\n7.Search (please note that text can be found more than once)\n8.Clear the console\n");
-   scanf("%d",&userMode);
-   return userMode;
+    int userMode ;
+    printf("Choose the command:\n1.Append text symbols to the end:\n2.Start the new line:\n3.Use files to loading the information\n4.Use files to saving the information\n5.Print the current text to console\n6.Insert the text by line and symbol index\n7.Search (please note that text can be found more than once)\n8.Clear the console\n");
+    scanf("%d",&userMode);
+    return userMode;
 }
+
+// structure of nodes
+struct nodeOfLinkedList {
+    char** ptrOnRow;
+    struct nodeOfLinkedList* nextNodeAdress;
+};
+
+
+
+
+
+
+
+
+
+
 int main() {
     int mode;
-    const int InitialNumOfBytePerString = 5;
-    const int numByIncreseBytes = 2;
+    const int InitialNumOfBytePerString = 10;
+    const int numByIncreseBytes = 5;
     // mode = userCommand();
     // switch(mode) {
     //     case 1:
@@ -67,7 +83,10 @@ int main() {
 
 
 
-// implementation of data structure
+// implementation of data structure of etxt cells
+    // later put in the function
+
+
     int counter;
     char* ptrRow;
     char userLetter ;
@@ -79,21 +98,33 @@ int main() {
 
 
     while((userLetter = (char)getchar()) != '\n') {
-        if (currentSizeArrayInBytes <= counter) {
-            currentSizeArrayInBytes = counter+numByIncreseBytes+2;
+        if (currentSizeArrayInBytes <= counter+1) {
+            currentSizeArrayInBytes += numByIncreseBytes;
             ptrRow = (char*) realloc(ptrRow,currentSizeArrayInBytes);
+            if (ptrRow == NULL) {
+                printf("Error occur during reallocation");
+                exit(0);
+            }
        }
         ptrRow[counter] = userLetter;
-
         counter ++;
        }
-    ptrRow[counter]= '\0';
-    for(int i = 0; i < counter ; i++) {
+
+    ptrRow[counter] = '\n';
+    ptrRow[counter++] = '\0';
+
+
+    for(int i = 0; i < counter - 1; i++) {
         printf("%c",ptrRow[i]);
    };
-    size_t length = strlen(ptrRow);
-    printf("The length of the input string is: %zu\n", length);
-    printf("%s",ptrRow);
+    printf("The length of the input string is: %lu, %d\n", strlen(ptrRow) ,counter);
+    printf("%d\n",currentSizeArrayInBytes);
+    printf("%s\n",ptrRow);
+
+
+    struct nodeOfLinkedList* firstNode= NULL;
+    firstNode = (struct nodeOfLinkedList*) malloc (sizeof(struct nodeOfLinkedList));
+
 
     return 0;
 }
