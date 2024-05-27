@@ -19,7 +19,7 @@ void clearInputBuffer() {
 
 int userCommand () {
     int userMode ;
-    printf("Choose the command:\n1.Append text symbols to the end:\n2.Start the new line:\n3.Use files to loading the information\n4.Use files to saving the information\n5.Print the current text to console\n6.Insert the text by line and symbol index\n7.Search (please note that text can be found more than once)\n8.Clear the console\n");
+    printf("\nChoose the command:\n1.Append text symbols to the end:\n2.Start the new line:\n3.Use files to loading the information\n4.Use files to saving the information\n5.Print the current text to console\n6.Insert the text by line and symbol index\n7.Search (please note that text can be found more than once)\n8.Clear the console\n");
     scanf("%d",&userMode);
     clearInputBuffer();
     return userMode;
@@ -83,7 +83,7 @@ node* createNodeWithoutText() {
 }
 
 // function of add node
-void* addNode(node* headOfLinkedList) {
+void addNode(node* headOfLinkedList) {
     if ((headOfLinkedList->ptrOnRow) == 0) {
         headOfLinkedList->ptrOnRow= accessPtrString();
         headOfLinkedList->nextNodeAdress = NULL;
@@ -98,7 +98,7 @@ void* addNode(node* headOfLinkedList) {
 }
 
 // access last string and get the pointer of string
-void* appendTextToEnd(node* headOfLinkedList) {
+void appendTextToEnd(node* headOfLinkedList) {
     if ((headOfLinkedList->ptrOnRow) == 0) {
         addNode(headOfLinkedList);
     }else {
@@ -121,7 +121,7 @@ void* appendTextToEnd(node* headOfLinkedList) {
 
 
 //add new string
-void* newLine(node* headOfLinkedList) {
+void newLine(node* headOfLinkedList) {
     if ((headOfLinkedList->ptrOnRow) == 0) {
         char* ptrRow =(char*) malloc(3);
         ptrRow[0] = '\n';
@@ -147,7 +147,7 @@ void* newLine(node* headOfLinkedList) {
 }
 
 // insert into a line if it exists exception only the first line
-void* insertionIntoLine(node* headOfLinkedList){
+void insertionIntoLine(node* headOfLinkedList){
     printf("%s","Enter two coordinates(line and row beginning from 0) for insertion by whitespace: ");
     int coordLine, coordRow;
     scanf("%d %d", &coordLine,&coordRow);
@@ -199,15 +199,14 @@ char* getName() {
     return fileName;
 }
 
-void* saveToFile(char* fileName,node* headOfLinkedList) {
+void saveToFile(char* fileName,node* headOfLinkedList) {
     FILE* fptr = fopen(fileName,"w");
     node* currentNode = headOfLinkedList;
     while(currentNode != NULL) {
-        fprintf(fptr,currentNode->ptrOnRow);
+        fprintf(fptr,"%s",currentNode->ptrOnRow);
         currentNode = currentNode->nextNodeAdress;
     }
     fclose(fptr);
-
 }
 
 // algorith for search output the array of int where each represents the start point of string
@@ -243,7 +242,7 @@ int* indexSearchAlgorithm(char* fullText, int lenFullText, char* substring, int 
         free(dynamicArray);
         return NULL;
     }else {
-        dynamicArray[counter] = '\0';
+        dynamicArray[counter] = -1;
         return dynamicArray;
     }
 }
@@ -255,6 +254,39 @@ int* findIndexSubstring(char* fullText, char* substring) {
     int* indexPosition = indexSearchAlgorithm(fullText,lenFullText,substring,lenSubstring);
     return indexPosition;
 }
+
+
+
+// get substring to search
+char * getSubstring(){
+    printf("Enter the substring which u wanna find: ");
+    char* userSubstring = accessPtrString();
+    return userSubstring;
+}
+
+
+
+void showIndexesSubstring(node* headOfLinkedList,char* userSubstring) {
+    printf("Here is the coordinates of the searched substring");
+    node* currentNode = headOfLinkedList;
+    char* fullText;
+    int* indexes;
+    int numOfLine = 0;
+    while(currentNode != NULL) {
+        fullText = currentNode->ptrOnRow;
+        indexes = findIndexSubstring(fullText, userSubstring);
+        if (indexes != NULL) {
+            for(int i = 0; indexes[i] != -1; i++) {
+                printf("(%d, %d);",numOfLine,indexes[i]);
+            }
+            free(indexes);
+        }
+        numOfLine ++;
+        currentNode = currentNode->nextNodeAdress;
+    }
+    printf("\nNOTE:If there is nothing next to semicolon,it means that your substring does not located in text ");
+}
+
 
 
 
@@ -285,9 +317,16 @@ int main(){
             case 4:
                 readTextFromMemory(headOfLinkedList);
                 break;
-            case 5://
-                char* nameOfFile = getName();
+            case 5:
+                char* nameOfFile;
+                nameOfFile= getName();
                 saveToFile(nameOfFile,headOfLinkedList);
+                break;;
+            case 6:
+                char* userSubstring;
+                userSubstring= getSubstring();
+                showIndexesSubstring(headOfLinkedList,userSubstring);
+                break;
 
 
 
