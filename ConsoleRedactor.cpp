@@ -150,48 +150,33 @@ void* newLine(node* headOfLinkedList) {
 void* insertionIntoLine(node* headOfLinkedList){
     printf("%s","Enter two coordinates(line and row beginning from 0) for insertion by whitespace: ");
     int coordLine, coordRow;
-    scanf("%d %d\n", &coordLine,&coordRow);
+    scanf("%d %d", &coordLine,&coordRow);
+    clearInputBuffer();
 
     if ((headOfLinkedList->ptrOnRow) == 0) {
         addNode(headOfLinkedList);
     } else {
-        int counter = 0;
         node* currentNode = headOfLinkedList;
-        while(currentNode->nextNodeAdress != NULL) {
-            currentNode = currentNode->nextNodeAdress;
-            counter ++;
-        }
-        currentNode = headOfLinkedList;
         for(int i = 0; i < coordLine; i++) {
              currentNode = currentNode->nextNodeAdress;
         }
-        char* ptrOldRow = currentNode->ptrOnRow ;
 
+        char* ptrOldRow = currentNode->ptrOnRow ;
+        printf("Enter a string to be inserted");
         char* ptrNewRow = accessPtrString();
+
         int amountOfLettersInOldRow = strlen(ptrOldRow);
         int amountOfLettersInNewRow = strlen(ptrNewRow);
+
         char* ptrRow = (char*) malloc( amountOfLettersInOldRow+amountOfLettersInNewRow+3);
 
-        for (int i = 0; i< coordLine; i++) {
-            ptrRow[i] = ptrOldRow[i];
-            printf("%s\n",ptrRow);
-        }
-        int nRow = 0;
-        for (int i = coordRow; i < coordRow + amountOfLettersInNewRow; i ++) {
-            ptrRow[i] = ptrNewRow[nRow];
-            nRow++;
-            printf("%s\n",ptrRow);
-        }
-        int oRow = coordLine + amountOfLettersInNewRow - amountOfLettersInNewRow;
-        for(int i = coordLine + amountOfLettersInNewRow; i < (amountOfLettersInNewRow+amountOfLettersInOldRow); i ++) {
-            ptrRow[i]= ptrOldRow[oRow];
-            oRow ++;
-            printf("%s\n",ptrRow);
+        strncpy(ptrRow, ptrOldRow, coordRow);
+        ptrRow[coordRow] = '\0';
+        strcat(ptrRow, ptrNewRow);
+        strcat(ptrRow, ptrOldRow + coordRow);
 
-        }
-        ptrRow[amountOfLettersInNewRow + amountOfLettersInNewRow] = '\0';
-        printf("Sooo %s",ptrRow);
         currentNode->ptrOnRow = ptrRow;
+
     }
 
 
@@ -229,6 +214,10 @@ int main(){
             case 3 :
                 insertionIntoLine(headOfLinkedList);
                 readTextFromMemory(headOfLinkedList);
+                break;
+            case 4:
+                readTextFromMemory(headOfLinkedList);
+                break;
         }
 
 
