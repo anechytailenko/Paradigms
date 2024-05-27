@@ -288,8 +288,76 @@ void showIndexesSubstring(node* headOfLinkedList,char* userSubstring) {
 }
 
 
+char* getLoadName() {
+    printf("Enter the name of file with .txt extention which should be uploaded: ");
+    char* fileName = accessPtrString();
+    return fileName;
+}
+// load file
+char* getLoadedText(char* fileLoad) {
+    FILE *fptr= fopen(fileLoad, "r");
+    int counter = 0;
+    int initialAmountOfBytes = 500;
+    int currentAmountOfBytes = initialAmountOfBytes;
+    char* fullText = (char*)calloc(currentAmountOfBytes,sizeof(char));
+    char myString[100];
+    if (fptr == NULL) {
+        printf("Error opening file");
+    }else {
+        while(fgets(myString, 100, fptr)) {
+            counter +=100;
+            if (counter+50>= currentAmountOfBytes) {
+                currentAmountOfBytes +=initialAmountOfBytes;
+                fullText = (char*) realloc(fullText,currentAmountOfBytes*sizeof(char));
+            }
+            strcat(fullText,myString);
+        }
+    }
+    fclose(fptr);
+    return fullText;
+}
 
+int* findTabSubstring(char* fullText) {
+    int lenFullText = strlen(fullText);
+    int lenSubstring = 1;
+    int* indexPosition = indexSearchAlgorithm(fullText,lenFullText,"\n",1);
+    return indexPosition;
+}
 
+// creation of node from load file
+void loadedFileToNode(int* indexArray, char* fullText,node* headOfLinkedList) {
+    int startIndex  = 0;
+    int endIndex;
+    int length;
+    if (indexArray != NULL) {
+        for(int i = 0; indexArray[i] != -1; i++) {
+            endIndex = indexArray[i]+1;
+            length = endIndex - startIndex;
+            char dataString[length+1];
+            strncpy(dataString, fullText + startIndex, length);
+            if ((headOfLinkedList->ptrOnRow) == 0) {
+                headOfLinkedList->ptrOnRow= dataString;
+                headOfLinkedList->nextNodeAdress = NULL;
+            }  else {
+                node* currentNode = headOfLinkedList;
+                while(currentNode->nextNodeAdress != NULL) {
+                    currentNode = currentNode->nextNodeAdress;
+                }
+                node* Node = (node*) malloc (sizeof(node));
+                Node->ptrOnRow = dataString;
+                Node->nextNodeAdress = NULL;
+                currentNode->nextNodeAdress = Node;
+            }
+            startIndex = indexArray[i]+1;
+
+        }
+
+    }
+}
+
+void clearConsole() {
+    system("clear");
+}
 
 
 
@@ -299,80 +367,47 @@ int main(){
     int mode;
     int n = 1;
     node* headOfLinkedList = (node*) calloc ( n, sizeof(node));
-    while(true){
+    while(true) {
         mode = userCommand();
         switch(mode) {
             case 1:
                 printf("Enter text to append: ");
                 appendTextToEnd(headOfLinkedList);
-                readTextFromMemory(headOfLinkedList);
                 break;
             case 2 :
                 newLine(headOfLinkedList);
                 break;
             case 3 :
                 insertionIntoLine(headOfLinkedList);
-                readTextFromMemory(headOfLinkedList);
                 break;
             case 4:
                 readTextFromMemory(headOfLinkedList);
                 break;
             case 5:
-                char* nameOfFile;
-                nameOfFile= getName();
-                saveToFile(nameOfFile,headOfLinkedList);
-                break;;
+                char* nameOfSaveFile;
+                nameOfSaveFile= getName();
+                saveToFile(nameOfSaveFile,headOfLinkedList);
+                break;
             case 6:
                 char* userSubstring;
                 userSubstring= getSubstring();
                 showIndexesSubstring(headOfLinkedList,userSubstring);
                 break;
-
-
-
-
+            case 7:
+                char* nameOfLoadFile;
+                int* indexArray;
+                char* fullText;
+                nameOfLoadFile = getLoadName();
+                fullText = getLoadedText(nameOfLoadFile);
+                printf("%s",fullText);
+                indexArray = findTabSubstring(fullText);
+                loadedFileToNode(indexArray,fullText,headOfLinkedList);
+                break;
+            case 8:
+                clearConsole();
+                break;
         }
-
-
-
-        //     printf("New line is started");
-        //     addNode(headOfLinkedList);
-
-
-        //     break;
-        //     case 3:
-        //         printf("Enter the file name for saving:");
-        //     break;
-        //     // user input file name
-        //     // print the succes of the operation otherwise ask to create file
-        //     case 4 :
-        //         printf("Enter the file name for loading:");
-        //     break;
-        //     // user input file name
-        //     // print the succes of the operation otherwise ask to create file
-        //     case 5:
-        //         printf("Print the current text to console:");
-        //     break;
-        //     // code for iteration through structure
-        //     case 6:
-        //         printf("Choose line and index:");
-        //     break;
-        //     // code for input parameters
-        //     printf("Enter text to insert:");
-        //     case 7:
-        //         printf("Enter text to search:");
-        //     // user word input
-        //     printf("Text is present in this position:");
-        //     break;
-        //     // code for algorithm search
-        //     case 8:
-        //         // code for clearing console
-        //             break;
-        //     default:
-        //         printf("There is no such command");
     }
-
-
     return 0;
 }
 
