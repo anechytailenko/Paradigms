@@ -183,6 +183,7 @@ void* insertionIntoLine(node* headOfLinkedList){
 }
 
 
+
 // read text from memory
 void readTextFromMemory(node* headOfLinkedList) {
     node* currentNode = headOfLinkedList;
@@ -191,6 +192,72 @@ void readTextFromMemory(node* headOfLinkedList) {
         currentNode = currentNode->nextNodeAdress;
     }
 }
+// function for working with file
+char* getName() {
+    printf("Enter the name of file with .txt extention where u wanna upload current text: ");
+    char* fileName = accessPtrString();
+    return fileName;
+}
+
+void* saveToFile(char* fileName,node* headOfLinkedList) {
+    FILE* fptr = fopen(fileName,"w");
+    node* currentNode = headOfLinkedList;
+    while(currentNode != NULL) {
+        fprintf(fptr,currentNode->ptrOnRow);
+        currentNode = currentNode->nextNodeAdress;
+    }
+    fclose(fptr);
+
+}
+
+// algorith for search output the array of int where each represents the start point of string
+
+int* indexSearchAlgorithm(char* fullText, int lenFullText, char* substring, int lenSubstring) {
+    int i, j;
+    int counter = 0;
+    int initialSizeDynamicArray = 10;
+    int currentSizeDynamicArray = initialSizeDynamicArray;
+    int* dynamicArray = (int*) calloc(initialSizeDynamicArray, sizeof(int));
+
+
+    for (i = 0; i <= lenFullText - lenSubstring; i++) {
+        for (j = 0; j < lenSubstring; j++) {
+            if (fullText[i + j] != substring[j]) {
+                break;
+            }
+        }
+
+        if (j == lenSubstring) {  // If the substring matches
+            if (counter >= currentSizeDynamicArray) {
+                currentSizeDynamicArray += 5;
+                dynamicArray = (int*) realloc(dynamicArray, currentSizeDynamicArray * sizeof(int));
+            }
+            dynamicArray[counter] = i;
+            counter++;
+            // Move the index past the current match
+            i += j - 1;
+        }
+    }
+
+    if (counter == 0) {
+        free(dynamicArray);
+        return NULL;
+    }else {
+        dynamicArray[counter] = '\0';
+        return dynamicArray;
+    }
+}
+
+// function for loading file means read the text with fptr and write it in node by \n splitting, so it make sense to implement first of all the finding substing in list
+int* findIndexSubstring(char* fullText, char* substring) {
+    int lenFullText = strlen(fullText);
+    int lenSubstring = strlen(substring);
+    int* indexPosition = indexSearchAlgorithm(fullText,lenFullText,substring,lenSubstring);
+    return indexPosition;
+}
+
+
+
 
 
 
@@ -218,6 +285,13 @@ int main(){
             case 4:
                 readTextFromMemory(headOfLinkedList);
                 break;
+            case 5://
+                char* nameOfFile = getName();
+                saveToFile(nameOfFile,headOfLinkedList);
+
+
+
+
         }
 
 
