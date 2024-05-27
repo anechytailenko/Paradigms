@@ -26,6 +26,7 @@ int userCommand () {
 }
 
 
+
 char* accessPtrString() {
     const int InitialNumOfBytePerString = 10;
     const int numByIncreseBytes = 5;
@@ -145,6 +146,57 @@ void* newLine(node* headOfLinkedList) {
 
 }
 
+// insert into a line if it exists exception only the first line
+void* insertionIntoLine(node* headOfLinkedList){
+    printf("%s","Enter two coordinates(line and row beginning from 0) for insertion by whitespace: ");
+    int coordLine, coordRow;
+    scanf("%d %d\n", &coordLine,&coordRow);
+
+    if ((headOfLinkedList->ptrOnRow) == 0) {
+        addNode(headOfLinkedList);
+    } else {
+        int counter = 0;
+        node* currentNode = headOfLinkedList;
+        while(currentNode->nextNodeAdress != NULL) {
+            currentNode = currentNode->nextNodeAdress;
+            counter ++;
+        }
+        currentNode = headOfLinkedList;
+        for(int i = 0; i < coordLine; i++) {
+             currentNode = currentNode->nextNodeAdress;
+        }
+        char* ptrOldRow = currentNode->ptrOnRow ;
+
+        char* ptrNewRow = accessPtrString();
+        int amountOfLettersInOldRow = strlen(ptrOldRow);
+        int amountOfLettersInNewRow = strlen(ptrNewRow);
+        char* ptrRow = (char*) malloc( amountOfLettersInOldRow+amountOfLettersInNewRow+3);
+
+        for (int i = 0; i< coordLine; i++) {
+            ptrRow[i] = ptrOldRow[i];
+            printf("%s\n",ptrRow);
+        }
+        int nRow = 0;
+        for (int i = coordRow; i < coordRow + amountOfLettersInNewRow; i ++) {
+            ptrRow[i] = ptrNewRow[nRow];
+            nRow++;
+            printf("%s\n",ptrRow);
+        }
+        int oRow = coordLine + amountOfLettersInNewRow - amountOfLettersInNewRow;
+        for(int i = coordLine + amountOfLettersInNewRow; i < (amountOfLettersInNewRow+amountOfLettersInOldRow); i ++) {
+            ptrRow[i]= ptrOldRow[oRow];
+            oRow ++;
+            printf("%s\n",ptrRow);
+
+        }
+        ptrRow[amountOfLettersInNewRow + amountOfLettersInNewRow] = '\0';
+        printf("Sooo %s",ptrRow);
+        currentNode->ptrOnRow = ptrRow;
+    }
+
+
+}
+
 
 // read text from memory
 void readTextFromMemory(node* headOfLinkedList) {
@@ -169,22 +221,16 @@ int main(){
             case 1:
                 printf("Enter text to append: ");
                 appendTextToEnd(headOfLinkedList);
-                printf("Enter text to append: ");
-                appendTextToEnd(headOfLinkedList);
-                printf("Enter text to append: ");
-                appendTextToEnd(headOfLinkedList);
-
                 readTextFromMemory(headOfLinkedList);
                 break;
             case 2 :
-                printf("Enter text to append: ");
-                appendTextToEnd(headOfLinkedList);
                 newLine(headOfLinkedList);
-                printf("Enter text to append: ");
-                appendTextToEnd(headOfLinkedList);
-                readTextFromMemory(headOfLinkedList);
                 break;
+            case 3 :
+                insertionIntoLine(headOfLinkedList);
+                readTextFromMemory(headOfLinkedList);
         }
+
 
 
         //     printf("New line is started");
