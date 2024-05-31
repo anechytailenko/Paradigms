@@ -1,0 +1,38 @@
+/Users/annanechytailenko/Desktop/Paradigms/ConsoleRedactor
+
+Choose the command:
+1.Append text symbols to the end:
+2.Start the new line:
+3.Insert the text by line and symbol index
+4.Print the current text to console
+5.Use files to saving the information
+6.Search (please note that text can be found more than once)
+7.Use files to loading the information
+7
+Enter the name of file with .txt extention which should be uploaded: sampleUploadFile.txt
+
+Choose the command:
+1.Append text symbols to the end:
+2.Start the new line:
+3.Insert the text by line and symbol index
+4.Print the current text to console
+5.Use files to saving the information
+6.Search (please note that text can be found more than once)
+7.Use files to loading the information
+4
+0The city sprawled beneath the towering skyline, a maze of streets and alleys alive with the rhythm of urban life. From the bustling markets teeming with vendors hawking their wares to the quiet corners where secrets lingered in the shadows, it was a tapestry woven from the threads of a thousand stories. Each step carried its own tale, whispered in the graffiti adorning alleyway walls or echoed in the laughter of children playing in forgotten parks.
+1High above, skyscrapers pierced the sky like sentinels of progress, their mirrored surfaces reflecting the ever-shifting landscape below. At night, the city transformed into a glittering jewel, its streets awash with the neon glow of signs promising everything from fortune to fame. Yet amidst the chaos, there were moments of stillness, when the world seemed to hold its breath in anticipation of the next great adventure.
+2
+3
+4
+5And so the city lived and breathed, a living organism unto itself, its heartbeat echoing through the veins of those who called it home. For in the city, as in life, there was beauty to be found in the most unexpected places, if only one dared to look
+6THE END!!!
+7
+Choose the command:
+1.Append text symbols to the end:
+2.Start the new line:
+3.Insert the text by line and symbol index
+4.Print the current text to console
+5.Use files to saving the information
+6.Search (please note that text can be found more than once)
+7.Use files to loading the information
