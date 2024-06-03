@@ -315,7 +315,7 @@ void loadedFileToNode( char* fullText,node* headOfLinkedList) {
     int startIndexPosition = 0;
     int lengthOfFullText = strlen(fullText);
     int* indexArray ;
-    int counterInsertFirstRow = 0; // ralated to the fact that the first row can be added to the current row (that was passed to console) or been inserted in empty row -> first row always inserted in existed row (exception: only for first string of the compiler we create a node for the first loaded string)
+    int counterInsertFirstRow = 0; // related to the fact that the first row can be added to the current row (that was passed to console) or been inserted in empty row -> first row always inserted in existed row (exception: only for first string of the compiler we create a node for the first loaded string)
 
     // fullText[lengthOfFullText] = '\n';
 
@@ -457,16 +457,13 @@ void insertionIntoLine(node* headOfLinkedList){
             strcat(ptrRow, ptrAddedRow);
             strcat(ptrRow, ptrOldRow + coordRow);
             currentNode->ptrOnRow = ptrRow;
-        } else if (coordRow == amountOfLettersInOldRow)  {    // actually case when the string is just a considts of \n and \0;
-            ptrOldRow = (char*) realloc(ptrOldRow, amountOfLettersInOldRow+ amountOfLettersInAddedRow+2);
-            validationOfRealocation(ptrOldRow);
-            indexTabArray = findTabSubstring(ptrOldRow);
-            indexOfTab = indexTabArray[0];
-            ptrOldRow[indexOfTab] = '\0';
-            strcat(ptrOldRow, ptrAddedRow);
-            ptrOldRow[amountOfLettersInAddedRow+amountOfLettersInAddedRow]  = '\n';
-            ptrOldRow[amountOfLettersInOldRow+amountOfLettersInOldRow+1] = '\0';
-            currentNode->ptrOnRow = ptrOldRow;
+        } else if (coordRow == amountOfLettersInOldRow)  {    // actually case when the string is just a consists of \n and \0;
+            char* Row = (char*) calloc(amountOfLettersInAddedRow+3, sizeof(char));
+            Row[0] = ' ';
+            strcat(Row, ptrAddedRow);//HERE
+            Row[1+amountOfLettersInAddedRow]  = '\n';
+            Row[amountOfLettersInAddedRow+2] = '\0';
+            currentNode->ptrOnRow =Row;
         } else {
             indexTabArray = findTabSubstring(ptrOldRow); // it only will retutn one value cause one node - one string
             indexOfTab = indexTabArray[0];
