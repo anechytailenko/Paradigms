@@ -39,3 +39,32 @@ public:
     void changeCursorLine(int numOfLine) {
         this->numOfCursorLine = numOfLine;
     }
+
+
+
+
+
+    lineClass(){
+        ptrRow = "\0";
+        ptrNextLine = nullptr;
+
+    }
+
+    lineClass(const lineClass& other) {
+        if (other.ptrRow != nullptr) {
+            ptrRow = new char[strlen(other.ptrRow) + 1];
+            strcpy(ptrRow, other.ptrRow);
+        } else {
+            ptrRow = nullptr;
+        }
+        if (other.ptrNextLine != nullptr) {
+            ptrNextLine = new lineClass(*other.ptrNextLine);
+        } else {
+            ptrNextLine = nullptr;
+        }
+    }
+
+    void clearInputBuffer() {
+        int c;
+        while ((c = getchar()) != '\n' && c != EOF);
+    }
