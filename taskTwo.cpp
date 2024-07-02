@@ -532,3 +532,100 @@ public:
 
     }
 };
+
+class undoRedo {
+    private:
+        static int amountOfConsecutiveUndo ;
+        lineClass* undoArray[4] = {nullptr};
+        lineClass* redoArray[4] = {nullptr};
+    public:
+    undoRedo(lineClass* headNode) {
+        undoArray[0]= headNode;
+    }
+        void setAmountOfConsecutiveUndo(int userUndo = 0) {
+        this->amountOfConsecutiveUndo = userUndo;
+    }
+
+        void funcToFillArray(lineClass* ptrOnHead, char* modeOfReturn) {
+            lineClass** givenArray;
+            if (modeOfReturn == "Undo") {
+                givenArray = undoArray;
+            } else {
+                givenArray = redoArray;
+            }
+            for (int i = 0; i <=3; i++) {
+                if (i == 3 && givenArray[i] != nullptr) {// change size
+                    givenArray[i+1] = ptrOnHead;
+                    for ( int j = 0 ; j <=3; j++) {
+                        givenArray[j] = givenArray[j+1];
+                    }
+                }
+                if (givenArray[i] != nullptr) {
+                    continue;
+                }
+                if (givenArray[i] == nullptr) {
+                    givenArray[i] = ptrOnHead;
+                    break;
+                }
+            }
+        }
+        lineClass* funcToDeleteLastElementInArray( char* modeOfReturn ) {
+            lineClass** givenArray;
+            if (modeOfReturn == "Undo") {
+                givenArray = this->undoArray;
+            } else {
+                givenArray = this->redoArray;
+            }
+            for (int i = 3; i >=0 ; i--) {
+                if (i== 0 && givenArray[i]==nullptr) {
+                    cout<< "End of undo stack" << endl;
+                    return nullptr;
+                }
+                if (givenArray[i] != nullptr) {
+                    lineClass* deletedState = new lineClass(*(givenArray[i]));
+                    givenArray[i] = nullptr;
+                    return deletedState;
+                }
+            }
+        }
+        lineClass* getLastState(char* modeOfReturn) {
+            lineClass** givenArray;
+            if (modeOfReturn == "Undo") {
+                givenArray = this->undoArray;
+            } else {
+                givenArray = this->redoArray;
+            }
+            for (int i = 3; i >=0 ; i--) {
+                if (givenArray[i] != nullptr) {
+                    lineClass* lastState = givenArray[i];
+                    return lastState;
+
+                }
+            }
+        }
+
+        void clearRedoArray() {
+            for (int i =0; i <=3; i++) {
+                redoArray[i] =nullptr;
+            }
+    }
+
+
+        lineClass* undoOperation() {
+            lineClass* deletedState = funcToDeleteLastElementInArray("Undo");
+            if(amountOfConsecutiveUndo == 0) {
+                clearRedoArray();
+            }
+            funcToFillArray(deletedState,"Redo");
+            lineClass* currentState = getLastState("Undo");
+            return currentState;
+        }
+
+        lineClass* redoOperation() {
+            lineClass* deletedState = funcToDeleteLastElementInArray("Redo");
+            funcToFillArray(deletedState,"Undo");
+            lineClass* currentState = getLastState("Undo");
+            return currentState;
+        }
+
+    };
