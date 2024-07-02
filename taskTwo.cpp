@@ -157,3 +157,24 @@ public:
 
         return *currentObj;
     }
+
+    // usually append getTextFromUser
+    char* concatenate(char* textToAppend = "\n\0") {
+        // Calculate the length of both strings
+        size_t sizeFormerText = strlen(this->ptrRow);
+        const char* userText = textToAppend;
+        size_t sizeAppendText = strlen(userText);
+
+        char* resultText = new char[sizeFormerText + sizeAppendText + 1];
+        strcpy(resultText, this->ptrRow);
+        strcpy(resultText + sizeFormerText,userText) ;
+
+        return resultText;
+    }
+    // append text to the end / usually input concatenate + chamge the position of cursor
+    void appendTextToTheEnd(char* appendText) {
+        this->ptrRow = appendText;
+        int sizeOfAltetredText = strlen(appendText);
+        this->changeCursorIndex(sizeOfAltetredText);
+
+    }
