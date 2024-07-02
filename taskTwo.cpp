@@ -629,3 +629,11 @@ class undoRedo {
         }
 
     };
+
+
+
+
+
+int lineClass::numOfCursorIndex = 0;
+int lineClass::numOfCursorLine = 0;
+int undoRedo::amountOfConsecutiveUndo=0;
