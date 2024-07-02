@@ -637,3 +637,164 @@ class undoRedo {
 int lineClass::numOfCursorIndex = 0;
 int lineClass::numOfCursorLine = 0;
 int undoRedo::amountOfConsecutiveUndo=0;
+
+
+
+int main() {
+    int mode ;
+    lineClass* headNodeLine = new lineClass();
+
+    lineClass* headNodeLineCopy  = new lineClass(*headNodeLine);
+    undoRedo state(headNodeLineCopy);
+    int amountCharToSave;
+    char* cutCopiedText = nullptr;
+    char* nameOfSaveFile;
+    char* nameOfUploadFile;
+    lineClass* lastNode;
+    char* textOfLastNode;
+
+
+while(true) {
+    cout <<"\nEnter the number of the command:\n1.Change the position of a cursor (line,index)\n2.Append text to the end;\n3.Start new line;\n4.Delete substring;\n5.Insertion without replacement;\n6.Insertion with replacement;\n7.Print current text;\n8.Cut command;\n9.Copy command;\n10.Paste command;\n11.Search by substring;\n12.Command save to file;\n13.Upload from file;\n14.Undo;\n15.Redo;\n";
+    cin >> mode;
+
+
+
+    switch (mode) {
+        case 1: //checked
+            cout << "Enter a coordinate of cursor by whitespace like \"Line Index\" " << endl;
+            int linePosition, indexPosition;
+            cin >> linePosition >> indexPosition;
+            (*headNodeLine).changeCursorCoord(linePosition,indexPosition);
+            state.setAmountOfConsecutiveUndo();
+            headNodeLineCopy = new lineClass(*headNodeLine);
+            state.funcToFillArray(headNodeLineCopy,"Undo");
+            break;
+        case 2: // checked
+            {
+            cout << "Append text to the end"<< endl;
+            lineClass& currentObj = headNodeLine->iterationToLastLine();
+            currentObj.appendTextToTheEnd((currentObj.concatenate(currentObj.getTextFromUser())));
+            state.setAmountOfConsecutiveUndo();
+            headNodeLineCopy = new lineClass(*headNodeLine);
+            state.funcToFillArray(headNodeLineCopy,"Undo");
+        }
+        break;
+        case 3:// checked
+            {
+            cout << "Start new line"<<endl;
+            lineClass& currentObj = headNodeLine->iterationToGivenLine(headNodeLine->getCursorLine());
+            currentObj.startNewLine();
+            state.setAmountOfConsecutiveUndo();
+            headNodeLineCopy = new lineClass(*headNodeLine);
+            state.funcToFillArray(headNodeLineCopy,"Undo");
+        }
+        break;
+        case 4: //checked
+            {
+            cout << "Delete substring"<< endl;
+            cout << "Enter the amount of letter that you wanna delete"<< endl;
+            int amountCharToDelete;
+            cin >> amountCharToDelete;
+            lineClass& currentObj = headNodeLine->iterationToGivenLine(headNodeLine->getCursorLine());
+            currentObj.deletedText(amountCharToDelete);
+            state.setAmountOfConsecutiveUndo();
+            headNodeLineCopy = new lineClass(*headNodeLine);
+            state.funcToFillArray(headNodeLineCopy,"Undo");
+        }
+        break;
+        case 5: // checked
+            {
+            cout << "Insertion without replacement"<< endl;
+            lineClass& currentObj = headNodeLine->iterationToGivenLine(headNodeLine->getCursorLine());
+            currentObj.insert(currentObj.partsForInsert());
+            state.setAmountOfConsecutiveUndo();
+            headNodeLineCopy = new lineClass(*headNodeLine);
+            state.funcToFillArray(headNodeLineCopy,"Undo");
+        }
+            break;
+        case 6: // checked
+            {
+            cout << "Insertion with replacement"<< endl;
+            lineClass& currentObj = headNodeLine->iterationToGivenLine(headNodeLine->getCursorLine());
+            currentObj.insert(currentObj.partsForInsert("Replacement"));
+            state.setAmountOfConsecutiveUndo();
+            headNodeLineCopy = new lineClass(*headNodeLine);
+            state.funcToFillArray(headNodeLineCopy,"Undo");
+        }
+            break;
+        case 7: // checked
+            cout<< "Print current text"<< endl;
+            (*headNodeLine).outputText();
+        break;
+        case 8:
+            cout << "Cut command"<< endl;
+            cout << "Enter the amount of letter that you wanna cut"<< endl;
+            int amountCharToCut;
+            cin >> amountCharToCut;
+            cutCopiedText = ((*headNodeLine).iterationToGivenLine((*headNodeLine).getCursorLine())).copiedText((*headNodeLine).getCursorIndex(),amountCharToCut);
+            ((*headNodeLine).iterationToGivenLine((*headNodeLine).getCursorLine())).deletedText(amountCharToCut);
+            state.setAmountOfConsecutiveUndo();
+            headNodeLineCopy = new lineClass(*headNodeLine);
+            state.funcToFillArray(headNodeLineCopy,"Undo");
+        break;
+        case 9:
+            cout << "Copy command";
+            cout << "Enter the amount of letter that you wanna copy"<< endl;
+            int amountCharToCopy;
+            cin >> amountCharToCopy;
+            cutCopiedText = ((*headNodeLine).iterationToGivenLine((*headNodeLine).getCursorLine())).copiedText((*headNodeLine).getCursorIndex(),amountCharToCopy);
+        break;
+        case 10:
+            cout<< "Paste command";
+            if (cutCopiedText == nullptr) {
+                cout<< "\nNothing to paste";
+                break;
+            }else{
+                ((*headNodeLine).iterationToGivenLine((*headNodeLine).getCursorLine())).insert(((*headNodeLine).iterationToGivenLine((*headNodeLine).getCursorLine())).partsForInsert("Non-replacement", cutCopiedText));
+                state.setAmountOfConsecutiveUndo();
+                headNodeLineCopy = new lineClass(*headNodeLine);
+                state.funcToFillArray(headNodeLineCopy,"Undo");
+            }
+        break;
+        case 11: //checked
+            cout<< "Search by substring";
+            (*headNodeLine).showIndexesSubstring((*headNodeLine).getTextFromUser());
+            state.funcToFillArray(headNodeLineCopy,"Undo");
+        break;
+        case 12:
+            cout<< "Command save to file";
+            nameOfSaveFile = (*headNodeLine).getTextFromUser("\nEnter the name of file with .txt extention");
+            (*headNodeLine).saveToFile(nameOfSaveFile);
+            break;
+        case 13:// checked
+            cout << "Upload from text";
+            nameOfUploadFile = (*headNodeLine).getTextFromUser("\nEnter the name of file with .txt extention");
+            (*headNodeLine).uploadFromFile(nameOfUploadFile,headNodeLine);
+            state.setAmountOfConsecutiveUndo();
+            headNodeLineCopy = new lineClass(*headNodeLine);
+            state.funcToFillArray(headNodeLineCopy,"Undo");
+        break;
+        case 14:
+            cout << "Undo";
+            // state.funcToFillArray(headNodeLineCopy,"Undo");
+            delete[] headNodeLine;
+            headNodeLine = new lineClass(*(state.undoOperation()));
+            lastNode = &(headNodeLine->iterationToLastLine());
+            textOfLastNode = lastNode->getLineText();
+            lastNode->changeCursorIndex(strlen(textOfLastNode));
+            state.setAmountOfConsecutiveUndo(1);
+
+        break;
+        case 15:
+            cout << "Redo";
+            state.funcToFillArray(headNodeLineCopy,"Undo");
+            headNodeLine = state.redoOperation();
+        break;
+        default:
+            cout << "There is no such command";
+            break;
+    }
+}
+    return 0;
+}
