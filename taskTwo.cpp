@@ -178,3 +178,51 @@ public:
         this->changeCursorIndex(sizeOfAltetredText);
 
     }
+    char* copiedText(int cursorIndex, int userAmountCharToCopy) {
+        int startIndex = cursorIndex;
+        char* textFromLine = this->ptrRow;
+        char* copiedTextFromLine = new char[userAmountCharToCopy+ 1];
+        int indexCopyResultText = 0;
+        for(int i = startIndex; i < (startIndex+userAmountCharToCopy) ; i++) {
+            copiedTextFromLine[indexCopyResultText] = textFromLine[i];
+            indexCopyResultText++;
+        }
+        copiedTextFromLine[indexCopyResultText] = '\0';
+        return copiedTextFromLine;
+    }
+
+    void deletedText(int userAmountLetterToCopy) {
+        int indexStartTextDelete = numOfCursorIndex;
+        char* textOfLine = this->ptrRow;
+        char* firstPartOfText = new char[indexStartTextDelete+1];
+
+        // kinda validation
+        if (textOfLine[this->getCursorIndex()] == '\0' || textOfLine[this->getCursorIndex()]== '\n') {
+            cout << "\nThere is no text remained, so u cant delete"<< endl;
+            return;
+        }
+
+        for(int j = 0; j < indexStartTextDelete; j++) {
+            firstPartOfText[j] = textOfLine[j];
+        }
+        firstPartOfText[indexStartTextDelete]='\0';
+
+        int indexStartSecondPart = indexStartTextDelete + userAmountLetterToCopy ; // 11
+        char* secondPartOfText = new char[strlen(textOfLine)-indexStartSecondPart+1];
+
+        int indexInSecondPart = 0;
+        for (int k = indexStartSecondPart; k < (strlen(textOfLine)); k++ ) {
+            secondPartOfText[indexInSecondPart] = textOfLine[k];
+            indexInSecondPart++;
+        }
+        secondPartOfText[indexInSecondPart] = '\0';
+
+
+        size_t sizeOfFirstPart = strlen(firstPartOfText);
+        size_t sizeOfSecondPart = strlen(secondPartOfText);
+        char* textAferDelete = new char[sizeOfFirstPart + sizeOfSecondPart + 1];
+        strcpy(textAferDelete,firstPartOfText);
+        strcat(textAferDelete,secondPartOfText);
+
+        this->ptrRow = textAferDelete;
+    }
