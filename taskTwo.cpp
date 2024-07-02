@@ -3,7 +3,28 @@
 #include <fstream>
 using namespace std;
 
+class sentencePartsInsert {
+private:
+    char* firstPartOfSentence;
+    char* userText;
+    char* secondPartOfSentence;
+public:
+    sentencePartsInsert(char* firstPartOfSentence, char* userText, char* secondPartOfSentence)
+    :firstPartOfSentence{firstPartOfSentence},
+    userText{userText},
+    secondPartOfSentence{secondPartOfSentence}{}
 
+    char* getFirstPartOfSentence() {
+        return firstPartOfSentence;
+    }
+    char* getUserPartOfSentence() {
+        return userText;
+    }
+    char* getSecondPartOfSentence() {
+        return secondPartOfSentence;
+    }
+
+};
 
 class lineClass {
 private:
@@ -296,4 +317,71 @@ public:
         if (existenceOfSubstring == 0) {
             cout << "Your substring does not located in text ";
         }
+    }
+    sentencePartsInsert partsForInsert(char* modeInsert = "Non-replacement", char* modeTextFromUser = "Insert" ) {
+        char* formerText = this->ptrRow;
+        char* userText;
+        if (modeTextFromUser == "Insert") {
+            userText = getTextFromUser();
+        } else {
+            userText = modeTextFromUser;
+        }
+
+        int cursorIndex = this->getCursorIndex();
+        char* firstPartOfSentence = new char[cursorIndex+1];
+        size_t sizeOfUserText = strlen(userText);
+        size_t sizeOfFirstPart = strlen(firstPartOfSentence);
+        size_t sizeOfFormerText = strlen(formerText);
+        char* secondPartOfSentence = new char[sizeOfFormerText - sizeOfFirstPart + 2];
+        int indexEndOfFirstPart;
+
+        int* arrayOfTab = indexSearchAlgorithm(formerText);
+
+        if (arrayOfTab!= NULL) {
+            int indexOfTab = arrayOfTab[0];
+            formerText[indexOfTab] = '\0';
+        }
+
+
+        if(formerText[cursorIndex]!='\0' ) {
+            indexEndOfFirstPart = cursorIndex - 1;
+            for (int i= 0; i <= indexEndOfFirstPart; i ++) {
+                firstPartOfSentence[i] = formerText[i];
+            }
+            firstPartOfSentence[indexEndOfFirstPart+1] = '\0';
+        }
+        if (cursorIndex == 0) {
+            firstPartOfSentence[0] = '\0';
+        }
+        if(formerText[cursorIndex]=='\0' ) {
+            strcpy(firstPartOfSentence,formerText);
+        }
+
+
+        int indexEndOfSecondPart = sizeOfFormerText;
+        int j = 0;
+        for( int i = cursorIndex; i <= indexEndOfSecondPart; i ++) {
+            secondPartOfSentence[j] = formerText[i];
+            j++;
+        }
+        if((arrayOfTab != NULL)) {
+            strcat(secondPartOfSentence,"\n\0");
+        }
+        if (modeInsert == "Replacement") {
+            int indexStartAfterReplacement = strlen(userText);
+            char* secondPartOfSentenceWithReplacement = new char[strlen(secondPartOfSentence)];
+            for(int i = 0; secondPartOfSentence[indexStartAfterReplacement] != '\0'; i ++) {
+                secondPartOfSentenceWithReplacement[i] = secondPartOfSentence[indexStartAfterReplacement];
+                indexStartAfterReplacement++;
+            }
+            if(arrayOfTab != NULL && strlen(secondPartOfSentenceWithReplacement) == 0) {
+                strcat(secondPartOfSentenceWithReplacement,"\n\0");
+            }
+            secondPartOfSentence = secondPartOfSentenceWithReplacement;
+        }
+
+
+
+        sentencePartsInsert objectForInsert = (sentencePartsInsert (firstPartOfSentence,userText,secondPartOfSentence));
+        return objectForInsert;
     }
