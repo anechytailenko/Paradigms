@@ -446,3 +446,89 @@ public:
         strcat(resultedText,secondPartOfFormerText);
         this->ptrRow = resultedText;
     }
+    void saveToFile(char* fileName) {
+        ofstream saveFile(fileName);
+        lineClass* currentObj;
+        currentObj = this;
+        while( currentObj != NULL) {
+            saveFile<<currentObj->ptrRow;
+            currentObj = currentObj->ptrNextLine;
+        }
+        saveFile.close();
+    }
+
+    void uploadFromFile(char* fileName, lineClass* headNode) {
+        ifstream uploadedFile(fileName); // rewrite to put file name
+
+
+
+
+        if (!uploadedFile.is_open()) {
+            cout << "Failed to open the file" << fileName << endl;
+        } else {
+
+
+            int indexOfCurrentCharInLine = 0;
+
+            char currentChar;
+
+            lineClass* ptrCurrentObjLine =  &(headNode->iterationToGivenLine(this->getCursorLine()));
+            int indexPositionPreviousCursor = ptrCurrentObjLine->numOfCursorIndex;
+            indexOfCurrentCharInLine = indexPositionPreviousCursor;
+            char* previousTextOfStartLine = ptrCurrentObjLine->ptrRow;
+            const int initialSizeOfPtr  = strlen(previousTextOfStartLine) +3;
+            char* ptrOnTextOfLine = new char[initialSizeOfPtr];
+            char* endedPartPreviousText = new char[initialSizeOfPtr];
+            strncpy(ptrOnTextOfLine,previousTextOfStartLine,indexPositionPreviousCursor);
+            strcpy(endedPartPreviousText,previousTextOfStartLine+indexPositionPreviousCursor);
+
+            int indexOfStartLine =  this->getCursorLine();
+            int numberOfUplodedFile = 0;
+
+
+            while (uploadedFile.get(currentChar)) {
+
+                if (indexOfCurrentCharInLine == initialSizeOfPtr - 1) { //
+                    char *new_ptrOnTextOfLine = new char[initialSizeOfPtr * 2];
+                    strcpy(new_ptrOnTextOfLine, ptrOnTextOfLine);
+                    delete[] ptrOnTextOfLine;
+                    ptrOnTextOfLine = new_ptrOnTextOfLine;
+                }
+                if (currentChar == '\n') {
+                    ptrOnTextOfLine[indexOfCurrentCharInLine] = '\0';
+                    char* textForNewLine = new char[strlen(ptrOnTextOfLine)+3];
+                    strcpy(textForNewLine,ptrOnTextOfLine);
+                    strcat(textForNewLine,"\n\0");
+                    ptrCurrentObjLine->ptrRow = textForNewLine;
+                    lineClass* ptrNextObjLine = new lineClass();
+                    ptrCurrentObjLine->ptrNextLine = ptrNextObjLine;
+                    ptrCurrentObjLine = ptrNextObjLine;
+
+
+                    delete[] ptrOnTextOfLine;
+                    ptrOnTextOfLine = new char[initialSizeOfPtr];
+                    indexOfCurrentCharInLine = 0;
+                    numberOfUplodedFile ++;
+                    continue;
+                }
+
+
+
+
+                ptrOnTextOfLine[indexOfCurrentCharInLine++] = currentChar;
+            }
+
+            int indexOfCursorLine = numberOfUplodedFile + indexOfStartLine;
+            lineClass* ptrCurrentObj = &(this->iterationToGivenLine(indexOfCursorLine));
+            char* textToLastUploadedLine = new char[strlen(endedPartPreviousText)+strlen(ptrOnTextOfLine)+3];
+            strcat(textToLastUploadedLine,ptrOnTextOfLine);
+            strcat(textToLastUploadedLine,endedPartPreviousText);
+            ptrCurrentObj->ptrRow = textToLastUploadedLine;
+            this->changeCursorCoord(indexOfCursorLine,strlen(ptrOnTextOfLine));
+
+            uploadedFile.close();
+
+        }
+
+    }
+};
