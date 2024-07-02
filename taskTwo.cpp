@@ -226,3 +226,74 @@ public:
 
         this->ptrRow = textAferDelete;
     }
+
+    int* indexSearchAlgorithm( char* currentText, char* substring = "\n") {
+        int i, j;
+        size_t sizeOfCurrentText = strlen(currentText);
+        size_t sizeOfSubstring = strlen(substring);
+        int counter = 0;
+        int initialSizeDynamicArray = 10;
+        int currentSizeDynamicArray = initialSizeDynamicArray;
+        int* dynamicArray = new int[initialSizeDynamicArray];
+
+
+        for ( i = 0; i <= sizeOfCurrentText - sizeOfSubstring; i++) {
+            for (  j = 0; j < sizeOfSubstring; j++) {
+                if (currentText[i + j] != substring[j]) {
+                    break;
+                }
+            }
+
+            if (j == sizeOfSubstring) {
+                if (counter >= currentSizeDynamicArray) {
+                    int* new_arr = new int[currentSizeDynamicArray+5];
+                    copy(dynamicArray, dynamicArray + currentSizeDynamicArray, new_arr);
+                    delete[] dynamicArray;
+                    dynamicArray = new_arr;
+                    currentSizeDynamicArray += 5;
+                }
+                dynamicArray[counter] = i;
+                counter++;
+                i += j - 1;
+            }
+        }
+
+        if (counter == 0) {
+            free(dynamicArray);
+            return NULL;
+        }else {
+            dynamicArray[counter] = -1;
+            return dynamicArray;
+        }
+    }
+
+    void showIndexesSubstring(char* userSubstring) {
+
+        cout<<"\nHere is the coordinates of the searched substring:"<< endl;
+        lineClass* currentLine;
+        currentLine = this;
+        bool existenceOfSubstring = 0;
+
+        char* currentTextOfLine;
+        int* indexes;
+        int numOfLine = 0;
+
+
+        while(currentLine != NULL) {
+            currentTextOfLine = currentLine->ptrRow;
+            indexes = indexSearchAlgorithm(currentTextOfLine,userSubstring);
+
+            if (indexes != NULL) {
+                for( int i = 0; indexes[i] != -1; i++) {
+                    cout << "("<< numOfLine<<","<<indexes[i]<< ")";
+                    existenceOfSubstring = 1;
+                }
+                delete indexes;
+            }
+            numOfLine ++;
+            currentLine = currentLine->ptrNextLine;
+        }
+        if (existenceOfSubstring == 0) {
+            cout << "Your substring does not located in text ";
+        }
+    }
