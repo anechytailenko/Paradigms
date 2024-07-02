@@ -385,3 +385,64 @@ public:
         sentencePartsInsert objectForInsert = (sentencePartsInsert (firstPartOfSentence,userText,secondPartOfSentence));
         return objectForInsert;
     }
+    void startNewLine() {
+        int indexOfCursor = this->getCursorIndex();
+        lineClass* ptrNewLine = new lineClass();
+        char* textOfPreviousLine = this->ptrRow;
+        char* newTextOfPreviousLine = new char[strlen(textOfPreviousLine)+3]();
+        char* textForNewLine = new char[strlen(textOfPreviousLine)+1]();
+        int indexOfPreviosLine = this->getCursorLine();
+        if (this->ptrNextLine == nullptr){
+            if(textOfPreviousLine[indexOfCursor]=='\0') {
+                strcpy(newTextOfPreviousLine,textOfPreviousLine);
+                strcat(newTextOfPreviousLine,"\n\0");
+                ptrNewLine->ptrRow = "\0";
+                this->changeCursorCoord(indexOfPreviosLine+1,0);
+            }else {
+                strncpy(newTextOfPreviousLine,textOfPreviousLine,indexOfCursor);
+                strcat(newTextOfPreviousLine,"\n\0");
+                strcpy(textForNewLine,textOfPreviousLine+indexOfCursor);
+                ptrNewLine->ptrRow = textForNewLine;
+                int sizeOfText = strlen(textForNewLine);
+                this->changeCursorCoord(indexOfPreviosLine+1,sizeOfText);
+            }
+            ptrNewLine->ptrNextLine = nullptr;
+            this->ptrNextLine = ptrNewLine;
+            this->ptrRow = newTextOfPreviousLine;
+        } else {// locate in middle
+            if((textOfPreviousLine[indexOfCursor]== '\n') || (textOfPreviousLine[indexOfCursor]== '\0') ) {
+                strcpy(newTextOfPreviousLine,textOfPreviousLine);
+                ptrNewLine->ptrRow = "\n\0";
+                this->changeCursorCoord(indexOfPreviosLine+1,0);
+
+            }else {
+                strncpy(newTextOfPreviousLine,textOfPreviousLine,indexOfCursor);
+                strcat(newTextOfPreviousLine,"\n\0");
+                strcpy(textForNewLine,textOfPreviousLine+indexOfCursor);
+                ptrNewLine->ptrRow = textForNewLine;
+                int sizeOfText = strlen(textForNewLine);
+                this->changeCursorCoord(indexOfPreviosLine+1,sizeOfText-1);
+            }
+            this->ptrRow = newTextOfPreviousLine;
+            lineClass* formerNextAdressLine = this->ptrNextLine;
+            this->ptrNextLine = ptrNewLine;
+            ptrNewLine->ptrNextLine = formerNextAdressLine;
+
+        }
+    }
+
+
+
+
+    void insert(sentencePartsInsert ObjectForInsert) {
+        char* firstPartOfFormerText = ObjectForInsert.getFirstPartOfSentence();
+        char* userText = ObjectForInsert.getUserPartOfSentence();
+        char* secondPartOfFormerText = ObjectForInsert.getSecondPartOfSentence();
+        char* resultedText = new char[strlen(firstPartOfFormerText)+ strlen(userText)+strlen(secondPartOfFormerText)+1];
+        strcpy(resultedText,firstPartOfFormerText);
+        strcat(resultedText,userText);
+        int sizeOfResultedText = strlen(resultedText);
+        this->changeCursorIndex(sizeOfResultedText);
+        strcat(resultedText,secondPartOfFormerText);
+        this->ptrRow = resultedText;
+    }
