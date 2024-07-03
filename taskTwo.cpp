@@ -505,7 +505,7 @@ public:
                     ptrCurrentObjLine = ptrNextObjLine;
 
 
-                    delete[] ptrOnTextOfLine;
+
                     ptrOnTextOfLine = new char[initialSizeOfPtr];
                     indexOfCurrentCharInLine = 0;
                     numberOfUplodedFile ++;

@@ -1,0 +1,165 @@
+/Users/annanechytailenko/Desktop/Paradigm2.0.0/cmake-build-debug/Paradigm2_0_0
+
+Enter the number of the command:
+1.Change the position of a cursor (line,index)
+2.Append text to the end;
+3.Start new line;
+4.Delete substring;
+5.Insertion without replacement;
+6.Insertion with replacement;
+7.Print current text;
+8.Cut command;
+9.Copy command;
+10.Paste command;
+11.Search by substring;
+12.Command save to file;
+13.Upload from file;
+14.Undo;
+15.Redo;
+13
+Upload from text
+Enter the name of file with .txt extentionupload.txt
+
+Enter the number of the command:
+1.Change the position of a cursor (line,index)
+2.Append text to the end;
+3.Start new line;
+4.Delete substring;
+5.Insertion without replacement;
+6.Insertion with replacement;
+7.Print current text;
+8.Cut command;
+9.Copy command;
+10.Paste command;
+11.Search by substring;
+12.Command save to file;
+13.Upload from file;
+14.Undo;
+15.Redo;
+7
+Print current text
+0The city sprawled beneath the towering skyline, a maze of streets and alleys alive with the rhythm of urban life. From the bustling markets teeming with vendors hawking their wares to the quiet corners where secrets lingered in the shadows, it was a tapestry woven from the threads of a thousand stories. Each step carried its own tale, whispered in the graffiti adorning alleyway walls or echoed in the laughter of children playing in forgotten parks.
+1High above, skyscrapers pierced the sky like sentinels of progress, their mirrored surfaces reflecting the ever-shifting landscape below. At night, the city transformed into a glittering jewel, its streets awash with the neon glow of signs promising everything from fortune to fame. Yet amidst the chaos, there were moments of stillness, when the world seemed to hold its breath in anticipation of the next great adventure.
+2
+3
+4Chemistry is the scientific discipline concerned with the study of matter, its properties, composition, structure, and the changes it undergoes during chemical reactions. As one of the central sciences, chemistry bridges the gap between physics and biology, providing essential knowledge and tools for various fields such as medicine, engineering, environmental science, and more. From the atoms and molecules that make up all substances to the complex biochemical pathways in living organisms, chemistry is integral to understanding the natural world.
+5
+6Historical Development of Chemistry
+7
+8The history of chemistry spans thousands of years, beginning with early human endeavors in metallurgy and alchemy. Alchemists in ancient civilizations like Egypt, China, India, and Greece sought to transform base metals into noble metals like gold and discover the elixir of life. Despite their mystical and often unscientific approaches, their experiments laid the groundwork for modern chemistry by emphasizing the transformation of substances.
+9
+10In the 17th century, Robert Boyle, often considered the father of modern chemistry, introduced the scientific method to the field. His work, "The Sceptical Chymist" (1661), challenged the classical elements of earth, water, air, and fire and advocated for a more rigorous, experimental approach. The 18th century saw significant advancements with Antoine Lavoisier's formulation of the law of conservation of mass and the development of the periodic table by Dmitri Mendeleev in the 19th century. These milestones paved the way for the rapid expansion of chemical knowledge in the 20th and 21st centuries.
+11Chemistry is a dynamic and evolving science that continues to shape our understanding of the natural world and drive technological advancements. From the molecular interactions that sustain life to the development of new materials and medicines, chemistry is integral to progress and innovation. As we face global challenges such as climate change, energy sustainability, and health care, the role of chemistry in providing solutions will become increasingly important, highlighting the enduring significance of this essential science.
+12
+13Chemical reactions involve the transformation of reactants into products through the breaking and forming of bonds. These reactions are governed by the principles of stoichiometry, which involves the quantitative relationships between reactants and products. Balancing chemical equations ensures that the law of conservation of mass is upheld, meaning the number of atoms for each element is conserved in a reaction.
+14
+15
+16And so the city lived and breathed, a living organism unto itself, its heartbeat echoing through the veins of those who called it home. For in the city, as in life, there was beauty to be found in the most unexpected places, if only one dared to look
+17THE END!!|
+Enter the number of the command:
+1.Change the position of a cursor (line,index)
+2.Append text to the end;
+3.Start new line;
+4.Delete substring;
+5.Insertion without replacement;
+6.Insertion with replacement;
+7.Print current text;
+8.Cut command;
+9.Copy command;
+10.Paste command;
+11.Search by substring;
+12.Command save to file;
+13.Upload from file;
+14.Undo;
+15.Redo;
+14
+Undo
+Enter the number of the command:
+1.Change the position of a cursor (line,index)
+2.Append text to the end;
+3.Start new line;
+4.Delete substring;
+5.Insertion without replacement;
+6.Insertion with replacement;
+7.Print current text;
+8.Cut command;
+9.Copy command;
+10.Paste command;
+11.Search by substring;
+12.Command save to file;
+13.Upload from file;
+14.Undo;
+15.Redo;
+7
+Print current text
+0|
+Enter the number of the command:
+1.Change the position of a cursor (line,index)
+2.Append text to the end;
+3.Start new line;
+4.Delete substring;
+5.Insertion without replacement;
+6.Insertion with replacement;
+7.Print current text;
+8.Cut command;
+9.Copy command;
+10.Paste command;
+11.Search by substring;
+12.Command save to file;
+13.Upload from file;
+14.Undo;
+15.Redo;
+15
+Redo
+Enter the number of the command:
+1.Change the position of a cursor (line,index)
+2.Append text to the end;
+3.Start new line;
+4.Delete substring;
+5.Insertion without replacement;
+6.Insertion with replacement;
+7.Print current text;
+8.Cut command;
+9.Copy command;
+10.Paste command;
+11.Search by substring;
+12.Command save to file;
+13.Upload from file;
+14.Undo;
+15.Redo;
+7
+Print current text
+0|The city sprawled beneath the towering skyline, a maze of streets and alleys alive with the rhythm of urban life. From the bustling markets teeming with vendors hawking their wares to the quiet corners where secrets lingered in the shadows, it was a tapestry woven from the threads of a thousand stories. Each step carried its own tale, whispered in the graffiti adorning alleyway walls or echoed in the laughter of children playing in forgotten parks.
+1High above, skyscrapers pierced the sky like sentinels of progress, their mirrored surfaces reflecting the ever-shifting landscape below. At night, the city transformed into a glittering jewel, its streets awash with the neon glow of signs promising everything from fortune to fame. Yet amidst the chaos, there were moments of stillness, when the world seemed to hold its breath in anticipation of the next great adventure.
+2
+3
+4Chemistry is the scientific discipline concerned with the study of matter, its properties, composition, structure, and the changes it undergoes during chemical reactions. As one of the central sciences, chemistry bridges the gap between physics and biology, providing essential knowledge and tools for various fields such as medicine, engineering, environmental science, and more. From the atoms and molecules that make up all substances to the complex biochemical pathways in living organisms, chemistry is integral to understanding the natural world.
+5
+6Historical Development of Chemistry
+7
+8The history of chemistry spans thousands of years, beginning with early human endeavors in metallurgy and alchemy. Alchemists in ancient civilizations like Egypt, China, India, and Greece sought to transform base metals into noble metals like gold and discover the elixir of life. Despite their mystical and often unscientific approaches, their experiments laid the groundwork for modern chemistry by emphasizing the transformation of substances.
+9
+10In the 17th century, Robert Boyle, often considered the father of modern chemistry, introduced the scientific method to the field. His work, "The Sceptical Chymist" (1661), challenged the classical elements of earth, water, air, and fire and advocated for a more rigorous, experimental approach. The 18th century saw significant advancements with Antoine Lavoisier's formulation of the law of conservation of mass and the development of the periodic table by Dmitri Mendeleev in the 19th century. These milestones paved the way for the rapid expansion of chemical knowledge in the 20th and 21st centuries.
+11Chemistry is a dynamic and evolving science that continues to shape our understanding of the natural world and drive technological advancements. From the molecular interactions that sustain life to the development of new materials and medicines, chemistry is integral to progress and innovation. As we face global challenges such as climate change, energy sustainability, and health care, the role of chemistry in providing solutions will become increasingly important, highlighting the enduring significance of this essential science.
+12
+13Chemical reactions involve the transformation of reactants into products through the breaking and forming of bonds. These reactions are governed by the principles of stoichiometry, which involves the quantitative relationships between reactants and products. Balancing chemical equations ensures that the law of conservation of mass is upheld, meaning the number of atoms for each element is conserved in a reaction.
+14
+15
+16And so the city lived and breathed, a living organism unto itself, its heartbeat echoing through the veins of those who called it home. For in the city, as in life, there was beauty to be found in the most unexpected places, if only one dared to look
+17THE END!!
+Enter the number of the command:
+1.Change the position of a cursor (line,index)
+2.Append text to the end;
+3.Start new line;
+4.Delete substring;
+5.Insertion without replacement;
+6.Insertion with replacement;
+7.Print current text;
+8.Cut command;
+9.Copy command;
+10.Paste command;
+11.Search by substring;
+12.Command save to file;
+13.Upload from file;
+14.Undo;
+15.Redo;

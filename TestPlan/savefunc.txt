@@ -1,0 +1,99 @@
+/Users/annanechytailenko/Desktop/Paradigm2.0.0/cmake-build-debug/Paradigm2_0_0
+
+Enter the number of the command:
+1.Change the position of a cursor (line,index)
+2.Append text to the end;
+3.Start new line;
+4.Delete substring;
+5.Insertion without replacement;
+6.Insertion with replacement;
+7.Print current text;
+8.Cut command;
+9.Copy command;
+10.Paste command;
+11.Search by substring;
+12.Command save to file;
+13.Upload from file;
+14.Undo;
+15.Redo;
+2
+Append text to the end
+
+Enter the text to appendHello
+
+Enter the number of the command:
+1.Change the position of a cursor (line,index)
+2.Append text to the end;
+3.Start new line;
+4.Delete substring;
+5.Insertion without replacement;
+6.Insertion with replacement;
+7.Print current text;
+8.Cut command;
+9.Copy command;
+10.Paste command;
+11.Search by substring;
+12.Command save to file;
+13.Upload from file;
+14.Undo;
+15.Redo;
+3
+Start new line
+
+Enter the number of the command:
+1.Change the position of a cursor (line,index)
+2.Append text to the end;
+3.Start new line;
+4.Delete substring;
+5.Insertion without replacement;
+6.Insertion with replacement;
+7.Print current text;
+8.Cut command;
+9.Copy command;
+10.Paste command;
+11.Search by substring;
+12.Command save to file;
+13.Upload from file;
+14.Undo;
+15.Redo;
+2
+Append text to the end
+
+Enter the text to appendWorld
+
+Enter the number of the command:
+1.Change the position of a cursor (line,index)
+2.Append text to the end;
+3.Start new line;
+4.Delete substring;
+5.Insertion without replacement;
+6.Insertion with replacement;
+7.Print current text;
+8.Cut command;
+9.Copy command;
+10.Paste command;
+11.Search by substring;
+12.Command save to file;
+13.Upload from file;
+14.Undo;
+15.Redo;
+12
+Command save to file
+Enter the name of file with .txt extentionsave.txt
+
+Enter the number of the command:
+1.Change the position of a cursor (line,index)
+2.Append text to the end;
+3.Start new line;
+4.Delete substring;
+5.Insertion without replacement;
+6.Insertion with replacement;
+7.Print current text;
+8.Cut command;
+9.Copy command;
+10.Paste command;
+11.Search by substring;
+12.Command save to file;
+13.Upload from file;
+14.Undo;
+15.Redo;
