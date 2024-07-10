@@ -670,6 +670,17 @@ public:
         }
 
     }
+    void appendTextToFile(const char* ptrOnAppendText, const char* nameOfOutputFile) {
+        ofstream outfile;
+        outfile.open(nameOfOutputFile, ios_base::app);
+        if (!outfile.is_open()) {
+            cout << "Failed to open the file" << nameOfOutputFile << endl;
+        }
+        outfile << ptrOnAppendText;
+        outfile.close();
+
+    }
+
 };
 
 
@@ -841,6 +852,7 @@ int main(){
             state.funcToFillArray(headNodeLineCopy,"Undo");
             headNodeLine = state.redoOperation();
             break;
+
         }
     }
     return 0;
