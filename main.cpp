@@ -680,7 +680,65 @@ public:
         outfile.close();
 
     }
+    void cipherImplemention(lineClass* headNode) {
+        int numberOfCommand;
+        cout << "Enter the number of command:\n1.Encrypt message;\n2.Decrypt message;"<< endl;
+        cin >> numberOfCommand;
+        if(numberOfCommand == 1){
+            setCipherFunc("encrypt");
+        } else if(numberOfCommand == 2) {
+            setCipherFunc("decrypt");
+        }
 
+        typedef char* (*funcPtr)(char*, int);
+        funcPtr cipherFunc = getCipherFunc();
+        char* nameOfInputFile;
+        int mode;
+        cout <<("What do you want to cipher:\n1.current text;\n2.file;\nEnter 1 or 2:");
+        cin >> mode;
+        if (mode == 1) {
+            saveToFile(*headNode,"intermediatefile.txt");
+            nameOfInputFile = "intermediatefile.txt";
+        } else if (mode == 2) {
+            nameOfInputFile = getTextFromUser("Enter a name of input file ");
+            while (strcmp("intermediatefile.txt",nameOfInputFile) == 0 ) {
+                nameOfInputFile = getTextFromUser("Enter a name of input file that is differ from 'intermediatefile.txt'");
+            }
+        }
+        char* nameOfOutputFile = getTextFromUser("Enter an output name of file");
+        int keyShift ;
+        cout << "Enter a key shift for the cipher: ";
+        cin >> keyShift ;
+
+        ifstream uploadedFile(nameOfInputFile);
+        if (!uploadedFile.is_open()) {
+            cout << "Failed to open the file" << nameOfInputFile << endl;
+        } else {
+            char currentChar;
+            int CHUNKSIZE = 20;
+            char* ptrTextInputFile = new char[CHUNKSIZE];
+            int counter = 0;
+            while (uploadedFile.get(currentChar)) {
+                if (counter == CHUNKSIZE - 2){
+                    char* outputTextAfterCipher = cipherFunc(ptrTextInputFile,keyShift);
+                    appendTextToFile(outputTextAfterCipher,nameOfOutputFile);
+                    delete[] ptrTextInputFile;
+                    ptrTextInputFile = new char[CHUNKSIZE];
+                    counter = 0;
+                }
+                ptrTextInputFile[counter++] = currentChar;
+            }
+            char* outputTextAfterCipher = cipherFunc(ptrTextInputFile,keyShift);
+            appendTextToFile(outputTextAfterCipher,nameOfOutputFile);
+            delete[] ptrTextInputFile;
+            delete[] outputTextAfterCipher;
+            ptrTextInputFile = new char[CHUNKSIZE];
+
+        }
+        if (mode == 1) {
+            remove(nameOfInputFile);
+        }
+    }
 };
 
 
@@ -852,7 +910,13 @@ int main(){
             state.funcToFillArray(headNodeLineCopy,"Undo");
             headNodeLine = state.redoOperation();
             break;
-
+            case 16:
+                cout << "Cipher Implementation";
+            alteration.cipherImplemention(headNodeLine);
+            break;
+            default:
+                cout << "There is no such command";
+            break;
         }
     }
     return 0;
