@@ -1,0 +1,50 @@
+/Users/annanechytailenko/Desktop/Paradigm4.0/cmake-build-debug/Paradigm4_0
+
+Enter the number of the command:
+1.Change the position of a cursor (line,index)
+2.Append text to the end;
+3.Start new line;
+4.Delete substring;
+5.Insertion without replacement;
+6.Insertion with replacement;
+7.Print current text;
+8.Cut command;
+9.Copy command;
+10.Paste command;
+11.Search by substring;
+12.Command save to file;
+13.Upload from file;
+14.Undo;
+15.Redo;
+16.File encryption/decryption;
+16
+Cipher ImplementationEnter the number of command:
+1.Encrypt message;
+2.Decrypt message;
+2
+What do you want to cipher:
+1.current text;
+2.file;
+Enter 1 or 2:2
+Enter a name of input file testinputfile.txt
+
+Enter an output name of fileoutputFileread.txt
+Enter a key shift for the cipher: 1
+
+Enter the number of the command:
+1.Change the position of a cursor (line,index)
+2.Append text to the end;
+3.Start new line;
+4.Delete substring;
+5.Insertion without replacement;
+6.Insertion with replacement;
+7.Print current text;
+8.Cut command;
+9.Copy command;
+10.Paste command;
+11.Search by substring;
+12.Command save to file;
+13.Upload from file;
+14.Undo;
+15.Redo;
+16.File encryption/decryption;

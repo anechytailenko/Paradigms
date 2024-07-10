@@ -1,0 +1,114 @@
+/Users/annanechytailenko/Desktop/Paradigm4.0/cmake-build-debug/Paradigm4_0
+
+Enter the number of the command:
+1.Change the position of a cursor (line,index)
+2.Append text to the end;
+3.Start new line;
+4.Delete substring;
+5.Insertion without replacement;
+6.Insertion with replacement;
+7.Print current text;
+8.Cut command;
+9.Copy command;
+10.Paste command;
+11.Search by substring;
+12.Command save to file;
+13.Upload from file;
+14.Undo;
+15.Redo;
+16.File encryption/decryption;
+2
+Append text to the end
+
+Enter the text to appendToday is a good weather
+
+Enter the number of the command:
+1.Change the position of a cursor (line,index)
+2.Append text to the end;
+3.Start new line;
+4.Delete substring;
+5.Insertion without replacement;
+6.Insertion with replacement;
+7.Print current text;
+8.Cut command;
+9.Copy command;
+10.Paste command;
+11.Search by substring;
+12.Command save to file;
+13.Upload from file;
+14.Undo;
+15.Redo;
+16.File encryption/decryption;
+3
+Start new line
+
+Enter the number of the command:
+1.Change the position of a cursor (line,index)
+2.Append text to the end;
+3.Start new line;
+4.Delete substring;
+5.Insertion without replacement;
+6.Insertion with replacement;
+7.Print current text;
+8.Cut command;
+9.Copy command;
+10.Paste command;
+11.Search by substring;
+12.Command save to file;
+13.Upload from file;
+14.Undo;
+15.Redo;
+16.File encryption/decryption;
+2
+Append text to the end
+
+Enter the text to appendHowever, it is said that rain is expected tommorow
+
+Enter the number of the command:
+1.Change the position of a cursor (line,index)
+2.Append text to the end;
+3.Start new line;
+4.Delete substring;
+5.Insertion without replacement;
+6.Insertion with replacement;
+7.Print current text;
+8.Cut command;
+9.Copy command;
+10.Paste command;
+11.Search by substring;
+12.Command save to file;
+13.Upload from file;
+14.Undo;
+15.Redo;
+16.File encryption/decryption;
+16
+Cipher ImplementationEnter the number of command:
+1.Encrypt message;
+2.Decrypt message;
+1
+What do you want to cipher:
+1.current text;
+2.file;
+Enter 1 or 2:1
+Enter an output name of fileoutputfileRam.txt
+Enter a key shift for the cipher: 1
+
+Enter the number of the command:
+1.Change the position of a cursor (line,index)
+2.Append text to the end;
+3.Start new line;
+4.Delete substring;
+5.Insertion without replacement;
+6.Insertion with replacement;
+7.Print current text;
+8.Cut command;
+9.Copy command;
+10.Paste command;
+11.Search by substring;
+12.Command save to file;
+13.Upload from file;
+14.Undo;
+15.Redo;
+16.File encryption/decryption;
+
+Process finished with exit code 143 (interrupted by signal 15:SIGTERM)
