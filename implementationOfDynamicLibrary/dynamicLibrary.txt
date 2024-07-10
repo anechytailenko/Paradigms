@@ -1,6 +1,0 @@
-g++ -c -fpic CaesarCipher.cpp -o implementationOfDynamicLibrary/CaesarCipher.o
-g++ -shared -o implementationOfDynamicLibrary/libCaesarCipher.dylib implementationOfDynamicLibrary/CaesarCipher.o
-g++ -o implementationOfDynamicLibrary/exeProgramWithDynamicLib implementationOfDynamicLibrary/programWithDynamicLib.cpp -ldl
-./implementationOfDynamicLibrary/exeProgramWithDynamicLib
-
-

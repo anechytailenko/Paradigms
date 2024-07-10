@@ -1,8 +1,0 @@
-gcc -c CaesarCipher.cpp -o implementationOfStaticLibrary/CaesarCipher.o
-ar rcs implementationOfStaticLibrary/libCaesarCipher.a implementationOfStaticLibrary/CaesarCipher.o
-g++ implementationOfStaticLibrary/programWithStaticLib.cpp -L./implementationOfStaticLibrary -lCaesarCipher -o implementationOfStaticLibrary/exeProgramWithStaticLib
-./implementationOfStaticLibrary/exeProgramWithStaticLib
-
-
-
-
