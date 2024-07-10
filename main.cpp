@@ -11,6 +11,44 @@ class CaesarCipher;
 
 
 
+
+class CaesarCipher {
+private:
+    typedef char* (*funcPtr)(char*, int);
+    funcPtr cipherFunc;
+    void* handle;
+public:
+    CaesarCipher() {
+        handle = dlopen("/Users/annanechytailenko/Desktop/Paradigm4.0/libCaesarCipher.dylib", RTLD_LAZY);
+        if(!handle) {
+            cerr<< "Lib not found: "<< dlerror()<< endl;
+        }
+    }
+    void setCipherFunc(const char* mode){
+        if (strcmp(mode, "encrypt")== 0) {
+            funcPtr encryptFunc = (funcPtr) dlsym(handle,"encrypt");
+            if (encryptFunc == nullptr) {
+                cerr << "Function of encryption was not found: " << dlerror()<< endl;
+                dlclose(handle);
+            }
+            cipherFunc  = encryptFunc;
+        } else if (strcmp(mode, "decrypt") == 0) {
+            funcPtr decryptFunc = (funcPtr)dlsym(handle,"decrypt");
+            if (decryptFunc == nullptr) {
+                cerr << "Function of decryption was not found: " << dlerror()<< endl;
+                dlclose(handle);
+            }
+            cipherFunc  = decryptFunc;
+        }
+
+
+    }
+    funcPtr getCipherFunc() {
+        return cipherFunc;
+    }
+
+};
+
 class cursorClass {
 protected:
     int numOfCursorIndex ;
@@ -633,6 +671,16 @@ public:
 
     }
 };
+
+
+
+
+
+
+
+
+
+
 int main(){
     int mode ;
     lineClass* headNodeLine = new lineClass();
@@ -793,3 +841,9 @@ int main(){
             state.funcToFillArray(headNodeLineCopy,"Undo");
             headNodeLine = state.redoOperation();
             break;
+        }
+    }
+    return 0;
+    }
+
+
