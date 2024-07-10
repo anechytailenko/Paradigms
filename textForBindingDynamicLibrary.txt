@@ -1,0 +1,4 @@
+g++ -c -fpic CaesarCipher.cpp -o CaesarCipher.o
+g++ -shared -o libCaesarCipher.dylib CaesarCipher.o
+g++ -o exeProgramWithDynamicLib main.cpp -ldl
+./exeProgramWithDynamicLib
