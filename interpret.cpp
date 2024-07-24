@@ -153,3 +153,55 @@ public:
 
     }
 };
+// creating nodes
+class AST {
+public:
+    virtual ~AST() = 0;
+};
+AST::~AST() {}
+
+class BinOpNode : public AST{
+public:
+    AST*  leftNode ;
+    Token token ;
+    AST* rightNode ;
+    BinOpNode(AST* left, Token selfToken, AST* right): leftNode(left), token(selfToken),rightNode(right){}
+};
+
+class IntegerNode: public AST{
+public:
+    Token token ;
+    string value = token.valueString ;
+    IntegerNode(Token selfToken): token(selfToken){}
+};
+
+class AssignNode: public AST {
+public:
+    AST*  leftNode ;
+    Token token ;
+    AST* rightNode ;
+    AssignNode(AST* left, Token selfToken, AST* right): leftNode(left),token(selfToken),rightNode(right){}
+};
+
+class VarNode:public AST {
+public:
+    Token token ;
+    string nameOfVar = token.valueString;
+    VarNode(Token selfToken): token(selfToken){}
+};
+
+class UnaryOpNode: public AST {
+public:
+    Token token;
+    AST* lowerNode;
+    UnaryOpNode(Token selfToken, AST* nextNode): token(selfToken),lowerNode(nextNode){}
+};
+
+class FuncNode: public AST {
+public:
+    vector<AST*> param;
+    Token token ;
+    FuncNode(vector<AST*> paramVec, Token selfToken): param(paramVec),token(selfToken){}
+
+};
+
