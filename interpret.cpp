@@ -41,3 +41,115 @@ public:
     // Token(tokenType type, int valueInt): type(type), valueInt(valueInt){}
     Token(tokenType type, const string valueStr): type(type), valueString(valueStr){}
 };
+
+
+// split text by token
+class Lexer {
+private:
+    friend class Parser;
+    const string textOFUserCommand;
+    int indexPos = 0;
+    char currentChar = textOFUserCommand[indexPos];
+public:
+    Lexer(string userCommand): textOFUserCommand(userCommand){};
+    void goToNextChar() {
+        ++indexPos;
+        if (indexPos > textOFUserCommand.length()) {
+            currentChar = EOF;
+        } else{
+            currentChar = textOFUserCommand[indexPos];
+        }
+    }
+    void skipWhiteSpace() {
+        while ( (currentChar != EOF) && (currentChar == ' ') ) {
+            goToNextChar();
+        }
+    }
+    string extractMultiDigit() {
+        string digit = "";
+        while ((currentChar != EOF) && (isdigit(currentChar)) ) {
+            digit += currentChar;
+            goToNextChar();
+        }
+        return digit;
+
+    }
+
+
+    Token getTokenVarOrFunc() {
+        string name = "";
+        while((currentChar != EOF) && (isalpha(currentChar)) ) {
+            name += currentChar;
+            goToNextChar();
+            if ( (name == "var") || (name == "def")) {
+                name = "";
+                goToNextChar();
+            }
+        }
+        if ( currentChar == '(') {
+            Token tokenFunc = Token(FUNC,name);
+            indexPos--;
+            return tokenFunc;
+        } else {
+            indexPos--;
+            Token tokenVar = Token(VAR,name);
+            if (varMap[name] != NULL){}
+            else{varMap[name] = NULL;}
+
+            return tokenVar;
+        }
+
+    }
+
+
+
+    Token getNextToken() {
+        while (currentChar != EOF) {
+            if ( currentChar == ' ') {
+                skipWhiteSpace();
+                continue; // maybe not make sence
+            }
+            if( isalpha(currentChar) ) {
+                return getTokenVarOrFunc();
+            }
+            if ( isdigit(currentChar) ) {
+                return Token(INTEGER,extractMultiDigit());
+            }
+            if( currentChar == '=') {
+                goToNextChar();
+                return Token(ASSIGN,"=");
+            }
+            if( currentChar == '+') {
+                goToNextChar();
+                return Token(PLUS,"+");
+            }
+            if( currentChar == '-') {
+                goToNextChar();
+                return Token(MINUS,"-");
+            }
+            if( currentChar == '*') {
+                goToNextChar();
+                return Token(MUL,"*");
+            }
+            if( currentChar == '/') {
+                goToNextChar();
+                return Token(DIV,"/");
+            }
+
+            if( (currentChar == '(')) {
+                goToNextChar();
+                return Token(LPAREN,"(");
+            }
+            if( (currentChar == ')')) {
+                goToNextChar();
+                return Token(RPAREN,")");
+            }
+            if ( currentChar == ',') {
+                return Token(COMMA,",");
+            }
+
+            return Token(END,"END");
+        }
+
+    }
+};
